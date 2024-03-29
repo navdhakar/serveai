@@ -59,7 +59,7 @@ def train(
     base_model:str="mistralai/Mistral-7B-v0.1",
     dataset_file:str="",
     output_dir:str="",
-    num_train_epochs:int=5,
+    max_steps:int=500,
     max_length:int=512,
     resume_checkpoint:str=None,
     batch_size:int=32,
@@ -142,7 +142,7 @@ def train(
         print(f"Weights and bias run: {run_name}")
     args = TrainingArguments(
         output_dir = output_dir,
-        num_train_epochs=num_train_epochs,
+        max_steps=max_steps,
         # max_steps = 1000, # comment out this line if you want to train in epochs
         per_device_train_batch_size = batch_size,
         warmup_steps = 0.03,

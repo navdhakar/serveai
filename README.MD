@@ -18,7 +18,7 @@ from streamai.llms import AutoMistral
 import json
 modelinstance = AutoMistral(base_model="mistralai/Mistral-7B-v0.1")
 modelinstance.loadmodel()
-response = modelinstance.inferenceIO(prompt="what is python?")
+response = modelinstance.inferenceIO(prompt_instruction="what is python?", prompt_input="")
 print(response)
 ```
 
@@ -37,8 +37,8 @@ custom_model.run() #this will create a server api endpoint for your model, at ht
 ```py
 from streamai.app import endpointIO
 from streamai.llms import Autoalpacalora
-def testiofunc(inpt:str):
-    output = modelinstance.inferenceIO(prompt=input)
+def testiofunc(input:str):
+    output = modelinstance.inferenceIO(prompt_instruction=input, prompt_input="")
 modelinstance = Autoalpacalora("decapoda-research/llama-7b-hf")
 modelinstance.loadmodel() #required for deployment of model as api, not required during finetuning.
 alpaca_model = endpointIO(modelinstance.inferenceIO)
@@ -56,7 +56,7 @@ print(json.dumps(modelinstance.info['dataset'], indent = 1))
 
 #let's provide the dataset url
 modelinstance.train(dataset_url="https://firebasestorage.googleapis.com/v0/b/pdf-analysis-saas.appspot.com/o/Other%2Fdataset.json?alt=media&token=28abd658-a308-4050-b631-54bab9b63a6b",
-                    num_train_epochs=5,
+                    max_steps=500,
                     max_length=512,
                     wb_token="weight and biase token (if you are using it)")
 ```

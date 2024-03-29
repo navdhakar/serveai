@@ -122,9 +122,9 @@ def main(
 
 def evaluate(
     instruction,
+    input,
     model,
     base_model="",
-    input=None,
     temperature=0.1,
     top_p=0.75,
     top_k=40,
@@ -134,9 +134,9 @@ def evaluate(
     **kwargs,
 ):
 
-    system_prompt = 'Generate 5 question from this text in array format to get most info about the text.'
+    system_prompt = instruction
     B_INST, E_INST = "[INST]", "[/INST]"
-    prompt = f"{B_INST}{system_prompt}\n{instruction.strip()}{E_INST}"
+    prompt = f"{B_INST}{system_prompt}\n{input.strip()}{E_INST}"
 
     tokenizer = AutoTokenizer.from_pretrained(base_model, trust_remote_code=True)
 
