@@ -119,7 +119,7 @@ def train(
     base_model_name = "mistral"
 
     run_name = base_model + output_dir
-    print(f"Number of training epochs: {num_train_epochs}")
+    print(f"Number of training steps: {max_steps}")
     print(f"context length: {max_length}")
     print(f"Batch size: {batch_size}")
     if wb_token:
